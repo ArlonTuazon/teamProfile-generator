@@ -1,20 +1,21 @@
-const { rejects } = require('assert');
+//const { rejects } = require('assert');
 const fs = require('fs');
-const { resolve } = require('path');
+//const { resolve } = require('path');
 
 const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
-        fs.writeFile('./dist/index.html', fileContent, err =>{
-            if (err) {
-                reject(err);
+      fs.writeFile('./dist/index.html', fileContent, err => {
+        if (err) {
+          reject(err);
+          return;
+        }
+  
+        resolve({
+          ok: true,
+          message: 'File created!'
+        });
+      });
+    });
+  };
 
-                return;
-            }
-            resolve ({
-                ok: true,
-                message: 'File Created!'
-            })
-        })
-    })
-
-}
+  module.exports = writeFile;

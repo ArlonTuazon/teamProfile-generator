@@ -15,7 +15,7 @@ const teamCards = teamData => {
 
     const engineer = teamData.engineer.map (function (job){
         let engineerHTML = `
-        <div class = "card" style="width: 18rem:">
+        <div class = "card" style="width: 18rem">
             <h2>${job.name}</h2>
             <h4>Engineer</h4>
             <p>ID: ${job.id}</p>
@@ -53,8 +53,11 @@ module.exports = employeeData => {
         </head>
         <body>
             <header>
-            <h1 class="text-center">My Team</h1>
+            <nav class="navbar navbar-light bg-danger">
+            <p class="text-center">
+            <h1>My Team</h1></p>
             </header>
+            </nav>
             ${teamCards(employeeData)}
         </body>
         </html>    
