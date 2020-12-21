@@ -1,17 +1,30 @@
+const inquirer = require('inquirer');
 const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
 const Manager = require('./lib/Manager.js');
-const inquirer = require('inquirer');
+const generatePage = ('./src/page-template')
 const fs = require('fs');
 
-const promptEngineer = () => {
+let manager = [];
+let engineer = [];
+let intern = [];
+let empList = {manager, engineer, intern};
+
+const Prompt = () => {
     return inquirer.prompt([
+    {
+        type: 'list',
+        name: 'role',
+        message:"Enter Employee's role:",
+        choices: ['Manager', 'Engineer', 'Intern']
+    },
+
     {
         type: "input",
         name: "name",
-        message: "Enter Engineer's name:",
-        validate: nameEngineer=> {
-            if (nameEngineer) {
+        message: "Enter Employee's name:",
+        validate: nameEmployee=> {
+            if (nameEmployee) {
                 return true;
             }
             else {
@@ -24,9 +37,9 @@ const promptEngineer = () => {
     {
         type: "input",
         name: "id",
-        message: "Enter Engineer's ID:",
-        validate: idEngineer => {
-            if (isNaN(idEngineer)) {
+        message: "Enter Employee's ID:",
+        validate: idEmployee => {
+            if (isNaN(idEmployee)) {
                 return "please enter a number";
               }
               return true;
@@ -36,77 +49,71 @@ const promptEngineer = () => {
     {
         type: "input",
         name: "email",
-        message: "Enter Engineer's email:",
-        validate: emailEngineer=> {
-            if (emailEngineer) {
+        message: "Enter Employee's email:",
+        validate: emailEmployee=> {
+            if (emailEmployee) {
                 return true;
             }
             else {
-                console.log ('Please Enter Name!')
+                console.log ('Please Enter Email!')
                 return false;
             }
         }
     }, 
 
-    {
-        type: "input",
-        name: "github",
-        message: "Enter Engineer's Github:",
-    }, 
-
-    {
-        type: "list",
-        name: "addMore",
-        message: "Would you like to add another Engineer or Intern?",
-        choices: ["Engineer", "Intern", "None"]
-    }, 
 ])
-
-}
-const promptIntern = () => {
-    return inquirer.prompt([
+.then(({name, id, email, role}) => {
+    if (role === "Manager") {
+        return inquirer
+                    .prompt([
     {
+    
         type: "input",
-        name: "name",
-        message: "Enter Intern's name:",
-        validate: nameIntern=> {
-            if (nameIntern) {
-                return true;
-            }
-            else {
-                console.log ('Please Enter Name!')
-                return false;
-            }
-        }
-    },
-
-    {
-        type: "input",
-        name: "id",
-        message: "Enter Intern's ID:",
-        validate: idIntern => {
-            if (isNaN(idIntern)) {
-                return "please enter a number";
-              }
-              return true;
-            }
+        name: "officeNum",
+        message: "Enter Manager's Office Number:",
     }, 
 
     {
-        type: "input",
-        name: "email",
-        message: "Enter Intern's email:",
-        validate: emailIntern => {
-            if (emailIntern) {
-                return true;
-            }
-            else {
-                console.log ('Please Enter email!')
-                return false;
-            }
-        }
+        type:'confirm',
+        name:'anotherEntry',
+        message: "Add another employee?",
+        default: false
+    }])
+.then(({office, newEmp}) => {
+    manager.push(new Manager(name, id, email, office))
+    // console.log(newEmp)
+    if (newEmp) {
+        return Prompt();
+    }
+    })
+    } 
+    else if (role === "Engineer") {
+        return inquirer
+        .prompt([
+    {
+        type: 'input',
+        name: 'github',
+        message: "What is the Engineer's Github username?"
     },
 
+    {
+        type:'confirm',
+        name:'anotherEntry',
+        message: "What you like to add another employee?",
+        default: false
+    }
+    ])
+    .then(({github, newEmp}) => {
+        engineer.push(new Engineer(name, id, email, github))
+      // console.log(newEmp)
+        if (newEmp) {
+            return Prompt();
+        }
+        })
+    }
+     else if (role === 'Intern') {
+        return inquirer
+        .prompt([    
     {
         type: "input",
         name: "school",
@@ -123,32 +130,28 @@ const promptIntern = () => {
     },
     
     {
-        type: "list",
-        name: "addMore",
-        message: "Would you like to add another Engineer or Intern?",
-        choices: ["Engineer", "Intern", "None"]
-    }, 
-
+        type:'confirm',
+        name:'anotherEntry',
+        message: "What you like to add another employee?",
+        default: false
+    }
 ])
+.then(({school, newEmp}) => {
+    intern.push(new Intern(name, id, email, school))
+    // console.log(newEmp)
+    if (newEmp) {
+        return Prompt();
+    }
+})
 }
-promptEngineer().then(function (answers){
-    console.log(answers);
-  })
-  .catch(error => {
-    if(error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
-    } else {
-      // Something else when wrong
-    }
-  })
+})
+};
 
-  promptIntern().then(function (answers){
-    console.log(answers);
-  })
-  .catch(error => {
-    if(error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
-    } else {
-      // Something else when wrong
-    }
-  })
+Prompt()
+    .then(teamData => {
+        return generatePage(empList)
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML)
+    })
+
