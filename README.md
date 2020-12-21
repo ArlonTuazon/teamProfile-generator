@@ -7,13 +7,13 @@
     * npm install jest
 
 ## Usage
-### Watch the video
+   Watch the video
 
 ## Test
-### Run node index.js and you will be propmted with a questions about your team and when you're done a file will be generated.
+   Run node index.js and you will be prompted with a questions about your team and when you're done a file will be generated.
 
 ## Video walkthrough link
 
 ## Github URL
-### https://github.com/ArlonTuazon/teamProfile-generator
+   https://github.com/ArlonTuazon/teamProfile-generator
     
