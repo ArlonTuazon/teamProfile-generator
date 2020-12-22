@@ -6,7 +6,7 @@ const teamCards = teamData => {
         <div class ="card">
         <div class="card-header bg-primary text-white">
             <h4>${job.name}</h4>
-            <h5><img src="https://img.icons8.com/wired/30/000000/tea-cup.png"/>Manager</h5>
+            <h5><img src="https://img.icons8.com/wired/30/000000/tea-cup.png"/>  Manager</h5>
         </div>
            <div class = "card-body">
             <ul class="list-group list-group-flush">            
@@ -27,7 +27,7 @@ const teamCards = teamData => {
         <div class ="card">
         <div class="card-header bg-primary text-white">
             <h4>${job.name}</h4>
-            <h5><img src="https://img.icons8.com/carbon-copy/25/000000/3d-glasses.png"/>Engineer</h5>
+            <h5><img src="https://img.icons8.com/carbon-copy/25/000000/3d-glasses.png"/>  Engineer</h5>
         </div>
         <div class = "card-body">
             <ul class="list-group list-group-flush">
@@ -48,7 +48,7 @@ const teamCards = teamData => {
         <div class = "card">
         <div class="card-header bg-primary text-white">
             <h4>${job.name}</h4>
-            <h5><img src="https://img.icons8.com/ios/30/000000/student-male--v1.png"/>Intern</h5>
+            <h5><img src="https://img.icons8.com/ios/30/000000/student-male--v1.png"/>  Intern</h5>
         </div>
         <div class = "card-body">
             <ul class="list-group list-group-flush">
