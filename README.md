@@ -13,6 +13,7 @@
    Run node index.js and you will be prompted with a questions about your team and when you're done a file will be generated.
 
 ## Video walkthrough link
+    <iframe src="https://drive.google.com/file/d/1wIspsBGzzUmUp6y0MwnxptSg89UR9mlu/preview" width="640" height="480"></iframe>
 
 ## Github URL
    https://github.com/ArlonTuazon/teamProfile-generator
