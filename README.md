@@ -18,6 +18,6 @@
    https://github.com/ArlonTuazon/teamProfile-generator
 
 #### Icon links
-<a href="https://icons8.com/icon/jvSNDQeeq9rb/3d-glasses">3D Glasses icon by Icons8</a>
-<a href="https://icons8.com/icon/54839/tea-cup">Tea Cup icon by Icons8</a>
+##### <a href="https://icons8.com/icon/jvSNDQeeq9rb/3d-glasses">3D Glasses icon by Icons8</a>
+##### <a href="https://icons8.com/icon/54839/tea-cup">Tea Cup icon by Icons8</a>
     

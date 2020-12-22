@@ -9,7 +9,7 @@ const writeFile = require('./src/generatePage.js')
 let manager = [];
 let engineer = [];
 let intern = [];
-let employeeArr = {manager, engineer, intern};
+let teamList = {manager, engineer, intern};
 
 function Prompt() {
     
@@ -18,13 +18,13 @@ function Prompt() {
         {
             type: 'list',
             name: 'role',
-            message:"What is the employee's role?",
+            message:"What is the Employee's role?",
             choices: ['Manager', 'Engineer', 'Intern']
         },
         {
             type:'input',
             name: 'employee',
-            message: "What is the Employee's name?",
+            message: "Enter Employee's name:",
             validate: nameEmployee=> {
                 if (nameEmployee) {
                     return true;
@@ -38,7 +38,7 @@ function Prompt() {
         {
             type:'input',
             name: 'id',
-            message: "What is the employee's ID number?",
+            message: "Enter Employee's ID:",
             validate: idEmployee => {
                 if (isNaN(idEmployee)) {
                     return "please enter a number";
@@ -49,7 +49,7 @@ function Prompt() {
         {
             type: 'input',
             name: 'email',
-            message: "What is the employee's email?",
+            message: "Enter Employee's email:",
             validate: emailEmployee=> {
                 if (emailEmployee) {
                     return true;
@@ -66,10 +66,10 @@ function Prompt() {
                     .prompt([{
                         type:'input',
                         name: 'office',
-                        message:"What is the Manager's office number?",
+                        message:"Enter Manager's office number:",
                         validate: managerNum => {
                             if (isNaN(managerNum)) {
-                                return "please enter a number";
+                                return "Please enter a number!";
                               }
                               return true;
                             }
@@ -77,7 +77,7 @@ function Prompt() {
                     {
                         type:'confirm',
                         name:'newEmp',
-                        message: "What you like to add another employee?",
+                        message: "Do you want to add another Employee?",
                         default: false
                     }])
                     .then(({office, newEmp}) => {
@@ -92,12 +92,12 @@ function Prompt() {
                     .prompt([{
                         type: 'text',
                         name: 'github',
-                        message: "What is the Engineer's Github username?"
+                        message: "Enter Engineer's Github username:"
                     },
                     {
                         type:'confirm',
                         name:'newEmp',
-                        message: "What you like to add another employee?",
+                        message: "Do you want to add another Employee?",
                         default: false
                     }])
                     .then(({github, newEmp}) => {
@@ -112,7 +112,7 @@ function Prompt() {
                     .prompt([{
                         type:'input',
                         name:'school',
-                        message: "What is the Intern's school?",
+                        message: "Enter Intern's school:",
                         validate: schoolIntern=> {
                             if (schoolIntern) {
                                 return true;
@@ -126,12 +126,12 @@ function Prompt() {
                     {
                         type:'confirm',
                         name:'newEmp',
-                        message: "What you like to add another employee?",
+                        message: "Do you want to add another Employee?",
                         default: false
                     }])
                     .then(({school, newEmp}) => {
                         intern.push(new Intern(employee, id, email, school))
-                        // console.log(employeeArr)
+                        
                         if (newEmp) {
                             return Prompt();
                         }
@@ -143,7 +143,7 @@ function Prompt() {
 Prompt()
   
   .then(teamData => {
-    return generatePage(employeeArr);
+    return generatePage(teamList);
   })
   .then(pageHTML => {
     return writeFile(pageHTML);
