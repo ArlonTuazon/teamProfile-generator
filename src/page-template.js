@@ -83,8 +83,8 @@ module.exports = employeeData => {
             <h1>My Team</h1></p>
             </header>
             </nav>
-            <div style="padding:50px;"> 
-            <div class = "card-deck">
+            <div style="padding:30px;"> 
+            <div class = "card-columns">
             ${teamCards(employeeData)}
             </div>
             </div>
